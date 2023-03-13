@@ -23,6 +23,8 @@ declare namespace Chat {
 	}
 
 	interface ConversationRequest {
+		apiKey:? string
+		apiAccessToken:? string
 		conversationId?: string
 		parentMessageId?: string
 	}

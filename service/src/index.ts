@@ -46,11 +46,11 @@ router.post('/config', async (req, res) => {
 })
 
 router.post('/sendEmail', async (req, res) => {
-	// 这里自行添加发送邮寄逻辑
-	res.send({ status: 'Success', message: '尊敬的用户，您当前正在注册或登录网站，验证码为：849273，有效期为 10 分钟', data: {  } })
+  // 这里自行添加发送邮寄逻辑
+  res.send({ status: 'Success', message: '尊敬的用户，您当前正在注册或登录网站，验证码为：849273，有效期为 10 分钟', data: { } })
 })
 
 app.use('', router)
 app.use('/api', router)
 
-app.listen(3002, () => globalThis.console.log('Server is running on port 3002'))
+app.listen(9090, () => globalThis.console.log('Server is running on port 9090'))

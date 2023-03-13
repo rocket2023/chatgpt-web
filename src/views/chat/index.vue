@@ -11,7 +11,7 @@ import { useUsingContext } from './hooks/useUsingContext'
 import HeaderComponent from './components/Header/index.vue'
 import { HoverButton, SvgIcon } from '@/components/common'
 import { useBasicLayout } from '@/hooks/useBasicLayout'
-import { useChatStore } from '@/store'
+import { useChatStore, useUserStore } from '@/store'
 import { fetchChatAPIProcess } from '@/api'
 import { t } from '@/locales'
 
@@ -40,11 +40,25 @@ const conversationList = computed(() => dataSources.value.filter(item => (!item.
 const prompt = ref<string>('')
 const loading = ref<boolean>(false)
 
+// Pcm 23/03/07
+const userStore = useUserStore()
+const userInfo = computed(() => userStore.userInfo)
+
 function handleSubmit() {
   onConversation()
 }
 
 async function onConversation() {
+  // Pcm 23/0307
+  const apikey = ref(userInfo.value.apikey ?? '')
+  const apiaccesstoken = ref(userInfo.value.apiaccesstoken ?? '')
+  if (!apikey.value && !apiaccesstoken.value) {
+    dialog.warning({
+      title: t('setting.nokey'),
+    })
+    return
+  }
+
   let message = prompt.value
 
   if (loading.value)
@@ -71,11 +85,19 @@ async function onConversation() {
   loading.value = true
   prompt.value = ''
 
-  let options: Chat.ConversationRequest = {}
+  // Pcm 23/0307
+  let options: Chat.ConversationRequest = { apiKey: '', apiAccessToken: '' }
   const lastContext = conversationList.value[conversationList.value.length - 1]?.conversationOptions
 
   if (lastContext && usingContext.value)
     options = { ...lastContext }
+
+  // Pcm 23/0307
+  if (apikey.value)
+    options.apiKey = apikey.value
+
+  if (apiaccesstoken.value)
+    options.apiAccessToken = apiaccesstoken.value
 
   addChat(
     +uuid,
@@ -117,7 +139,7 @@ async function onConversation() {
                 inversion: false,
                 error: false,
                 loading: false,
-                conversationOptions: { conversationId: data.conversationId, parentMessageId: data.id },
+                conversationOptions: { apiKey: '', apiAccessToken: '', conversationId: data.conversationId, parentMessageId: data.id },
                 requestOptions: { prompt: message, options: { ...options } },
               },
             )
@@ -247,7 +269,7 @@ async function onRegenerate(index: number) {
                 inversion: false,
                 error: false,
                 loading: false,
-                conversationOptions: { conversationId: data.conversationId, parentMessageId: data.id },
+                conversationOptions: { apiKey: '', apiAccessToken: '', conversationId: data.conversationId, parentMessageId: data.id },
                 requestOptions: { prompt: message, ...options },
               },
             )

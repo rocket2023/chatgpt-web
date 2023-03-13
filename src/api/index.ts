@@ -20,35 +20,35 @@ export function fetchChatConfig<T = any>() {
 }
 
 export function sendEmail<T = any>(
-	email: string,
-	token: string
+  email: string,
+  token: string,
 ) {
-	return post<T>({
-		url: '/sendEmail',
-		data: {email, token},
-	})
+  return post<T>({
+    url: '/sendEmail',
+    data: { email, token },
+  })
 }
 
 export function accountLogin<T = any>(
-	email: string,
-	code: string
+  email: string,
+  code: string,
 ) {
-	return post<T>({
-		url: '/login',
-		data: {email, code},
-	})
+  return post<T>({
+    url: '/login',
+    data: { email, code },
+  })
 }
 
 export function accountlogout<T = any>() {
-	return get<T>({
-		url: '/logout',
-	})
+  return get<T>({
+    url: '/logout',
+  })
 }
 
 export function fetchUsetInfo<T = any>() {
-	return get<T>({
-		url: '/user'
-	})
+  return get<T>({
+    url: '/user',
+  })
 }
 
 export function fetchChatAPIProcess<T = any>(

@@ -22,12 +22,12 @@ const timeoutMs: number = !isNaN(+process.env.TIMEOUT_MS) ? +process.env.TIMEOUT
 
 let apiModel: ApiModel
 
-if (!process.env.OPENAI_API_KEY && !process.env.OPENAI_ACCESS_TOKEN)
-  throw new Error('Missing OPENAI_API_KEY or OPENAI_ACCESS_TOKEN environment variable')
+// if (!process.env.OPENAI_API_KEY && !process.env.OPENAI_ACCESS_TOKEN)
+//   throw new Error('Missing OPENAI_API_KEY or OPENAI_ACCESS_TOKEN environment variable')
 
 let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
 
-(async () => {
+async function optionsInitApi(Apikey, ApiAccessToken: string) {
   // More Info: https://github.com/transitive-bullshit/chatgpt-api
 
   if (process.env.OPENAI_API_KEY) {
@@ -37,7 +37,7 @@ let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
       : 'gpt-3.5-turbo'
 
     const options: ChatGPTAPIOptions = {
-      apiKey: process.env.OPENAI_API_KEY,
+      apiKey: Apikey,
       completionParams: { model },
       debug: false,
     }
@@ -60,7 +60,7 @@ let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
   }
   else {
     const options: ChatGPTUnofficialProxyAPIOptions = {
-      accessToken: process.env.OPENAI_ACCESS_TOKEN,
+      accessToken: ApiAccessToken,
       debug: false,
     }
 
@@ -80,11 +80,11 @@ let api: ChatGPTAPI | ChatGPTUnofficialProxyAPI
     api = new ChatGPTUnofficialProxyAPI({ ...options })
     apiModel = 'ChatGPTUnofficialProxyAPI'
   }
-})()
+}
 
 async function chatReplyProcess(
   message: string,
-  lastContext?: { conversationId?: string; parentMessageId?: string },
+  lastContext?: { apiKey?: string; apiAccessToken?: string; conversationId?: string; parentMessageId?: string },
   process?: (chat: ChatMessage) => void,
 ) {
   // if (!message)
@@ -92,8 +92,9 @@ async function chatReplyProcess(
 
   try {
     let options: SendMessageOptions = { timeoutMs }
-
     if (lastContext) {
+      // Pcm 23/0307
+      await optionsInitApi(lastContext.apiKey, lastContext.apiAccessToken)
       if (apiModel === 'ChatGPTAPI')
         options = { parentMessageId: lastContext.parentMessageId }
       else
