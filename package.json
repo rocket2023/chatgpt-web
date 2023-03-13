@@ -34,9 +34,9 @@
     "vue": "^3.2.47",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.1.6",
-		"uuid": "^9.0.0",
-		"vue3-puzzle-vcode": "^1.0.8"
-  },
+		"slide-verify-code": "^1.0.0",
+		"uuid": "^9.0.0"
+	},
   "devDependencies": {
     "@antfu/eslint-config": "^0.35.3",
     "@commitlint/cli": "^17.4.4",

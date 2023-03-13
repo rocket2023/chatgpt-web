@@ -28,6 +28,7 @@ specifiers:
   pinia: ^2.0.32
   postcss: ^8.4.21
   rimraf: ^4.2.0
+  slide-verify-code: ^1.0.0
   tailwindcss: ^3.2.7
   typescript: ~4.9.5
   uuid: ^9.0.0
@@ -37,7 +38,6 @@ specifiers:
   vue-i18n: ^9.2.2
   vue-router: ^4.1.6
   vue-tsc: ^1.2.0
-  vue3-puzzle-vcode: ^1.0.8
 
 dependencies:
   '@traptitech/markdown-it-katex': 3.6.0
@@ -48,11 +48,11 @@ dependencies:
   markdown-it: 13.0.1
   naive-ui: 2.34.3_vue@3.2.47
   pinia: 2.0.33_hmuptsblhheur2tugfgucj7gc4
+  slide-verify-code: 1.0.0
   uuid: 9.0.0
   vue: 3.2.47
   vue-i18n: 9.2.2_vue@3.2.47
   vue-router: 4.1.6_vue@3.2.47
-  vue3-puzzle-vcode: 1.0.8
 
 devDependencies:
   '@antfu/eslint-config': 0.35.3_ycpbpc6yetojsgtrx3mwntkhsu
@@ -74,7 +74,7 @@ devDependencies:
   npm-run-all: 4.1.5
   postcss: 8.4.21
   rimraf: 4.3.0
-  tailwindcss: 3.2.7
+  tailwindcss: 3.2.7_postcss@8.4.21
   typescript: 4.9.5
   vite: 4.1.4_4l5pdn5ozbjpiwj3fcgseihr44
   vite-plugin-pwa: 0.14.4_vite@4.1.4
@@ -5879,6 +5879,10 @@ packages:
       is-fullwidth-code-point: 4.0.0
     dev: true
 
+  /slide-verify-code/1.0.0:
+    resolution: {integrity: sha512-JQxA/RzptxXMF2/KodfnTxus8wDX0ycKjaGL9Qd2LiZ4I3hWORmTpFTwC9OcDDJW8P46RKRU+chzdgydRvDPDw==}
+    dev: false
+
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
@@ -6074,10 +6078,12 @@ packages:
     engines: {node: '>= 0.4'}
     dev: true
 
-  /tailwindcss/3.2.7:
+  /tailwindcss/3.2.7_postcss@8.4.21:
     resolution: {integrity: sha512-B6DLqJzc21x7wntlH/GsZwEXTBttVSl1FtCzC8WP4oBc/NKef7kaax5jeihkkCEWc831/5NDJ9gRNDK6NEioQQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
@@ -6545,10 +6551,6 @@ packages:
       '@vue/runtime-dom': 3.2.47
       '@vue/server-renderer': 3.2.47_vue@3.2.47
       '@vue/shared': 3.2.47
-
-  /vue3-puzzle-vcode/1.0.8:
-    resolution: {integrity: sha512-Zn2Fe6zFuPUFawWuSVOpM03V5rGRJE3NeJ3BzePQGrUCJB0BtNKlebIhzroHJlz/aQpg8ifhermUCcFZ0scX/Q==}
-    dev: false
 
   /vueuc/0.4.51_vue@3.2.47:
     resolution: {integrity: sha512-pLiMChM4f+W8czlIClGvGBYo656lc2Y0/mXFSCydcSmnCR1izlKPGMgiYBGjbY9FDkFG8a2HEVz7t0DNzBWbDw==}

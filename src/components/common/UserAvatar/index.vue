@@ -1,6 +1,6 @@
 <script lang='ts' setup>
 import {computed, defineAsyncComponent, ref} from 'vue'
-import {NAvatar, NButton, useDialog, useMessage} from 'naive-ui'
+import {NAvatar, NButton, useMessage} from 'naive-ui'
 import {useUserStore} from '@/store'
 import defaultAvatar from '@/assets/avatar.jpg'
 import {accountlogout} from "@/api";
@@ -8,28 +8,22 @@ import {removeUserState, removeUserToken} from "@/store/modules/user/helper";
 
 const message = useMessage()
 
-const dialog = useDialog()
 const userStore = useUserStore()
 const userInfo = computed(() => userStore.userInfo)
 
 const Login = defineAsyncComponent(() => import('@/components/common/Account/index.vue'))
-const show = ref(true)
+const show = ref(false)
 
 const logout = async () => {
-	dialog.warning({
-		title: '退出登录',
-		content: '是否要退出当前账号',
-		positiveText: '确认',
-		negativeText: '取消',
-		onPositiveClick: () => {
-			accountlogout().then(res => {
-				if (res.status === "Success") {
-					removeUserToken()
-					removeUserState()
-					userStore.resetUserInfo()
-				}
-			})
-		},
+	await accountlogout().then(res => {
+		if (res.status === "Success") {
+			removeUserToken()
+			removeUserState()
+			userStore.resetUserInfo()
+			message.success(res.message as string)
+		} else {
+			message.error(res.message as string)
+		}
 	})
 }
 
@@ -68,7 +62,7 @@ const logout = async () => {
 				</h2>
 			</NButton>
 
-			<Login v-if="userInfo.status === 0" v-model:visible="show"/>
+			<Login v-if="show" v-model:visible="show"/>
 		</div>
 	</div>
 </template>

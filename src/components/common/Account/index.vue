@@ -41,7 +41,7 @@ function closeModel() {
 </script>
 
 <template>
-  <NModal v-model:show="show" :auto-focus="false" :mask-closable="false" :close-on-esc="false" preset="dialog" title="用户认证" class="min-w-[100px]:" :z-index="100">
+  <NModal v-model:show="show" :auto-focus="false" :closable="false" :mask-closable="false" :close-on-esc="false" preset="dialog" title="用户认证" class="min-w-[100px]:" :z-index="100">
     <Login v-if="!reload" @update="handleReload" @closeModel="closeModel" />
   </NModal>
 </template>

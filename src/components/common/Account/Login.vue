@@ -11,6 +11,7 @@ import { setUserToken } from '@/store/modules/user/helper'
 
 const emit = defineEmits<Emit>()
 const { isMobile } = useBasicLayout()
+const userStore = useUserStore()
 const message = useMessage()
 
 interface Emit {
@@ -82,9 +83,8 @@ const onFail = () => {
 const countDown = () => {
   timeCount.value = 10
   setInterval(() => {
-    if (timeCount.value > 0) {
+    if (timeCount.value > 0)
       timeCount.value--
-    }
     else
       disabled.value.token = false
   }, 1000)
@@ -92,17 +92,17 @@ const countDown = () => {
 
 const onKeyUp = () => {
   disabled.value.token = !isEmail(loginForm.value.email)
-  disabled.value.submit = !loginForm.value.code.length
+  disabled.value.submit = !isEmail(loginForm.value.email) || !loginForm.value.code.length
 }
-const userStore = useUserStore()
-const onSubmit = async () => {
+
+const onSubmit = () => {
   if (!isEmail(loginForm.value.email))
     emailRef.value?.focus()
 
   if (!loginForm.value.code.length)
     codeRef.value?.focus()
 
-  await accountLogin(loginForm.value.email.toLowerCase(), loginForm.value.code).then((res) => {
+  accountLogin(loginForm.value.email.toLowerCase(), loginForm.value.code).then((res) => {
     if (res.status === 'Success') {
       emit('closeModel')
       setUserToken(res.data.token)
