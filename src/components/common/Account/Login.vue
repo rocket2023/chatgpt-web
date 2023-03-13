@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { computed, ref } from 'vue'
-import Vcode from 'vue3-puzzle-vcode'
+import Vcode from 'slide-verify-code'
 import { NButton, NInput, useMessage } from 'naive-ui'
 import { v4 as uuidv4 } from 'uuid'
 import { isEmail } from '@/utils/is'

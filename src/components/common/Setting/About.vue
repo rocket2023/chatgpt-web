@@ -23,9 +23,9 @@ const userStore = useUserStore()
 
 const userInfo = computed(() => userStore.userInfo)
 
-const apikey = ref(userInfo.value.apikey ?? '')
+const apiKey = ref(userInfo.value.apiKey ?? '')
 
-const apiaccesstoken = ref(userInfo.value.apiaccesstoken ?? '')
+const apiAccessToken = ref(userInfo.value.apiAccessToken ?? '')
 
 function updateUserInfo(options: Partial<UserInfo>) {
   userStore.updateUserInfo(options)
@@ -71,18 +71,18 @@ onMounted(() => {
         <div class="flex items-center space-x-4">
           <span class="flex-shrink-0 w-[100px]">{{ $t('setting.apikey') }}</span>
           <div class="flex-1">
-            <NInput v-model:value="apikey" placeholder="" />
+            <NInput v-model:value="apiKey" placeholder="" />
           </div>
-          <NButton size="tiny" text type="primary" @click="updateUserInfo({ apikey })">
+          <NButton size="tiny" text type="primary" @click="updateUserInfo({ apiKey })">
             {{ $t('common.save') }}
           </NButton>
         </div>
         <div class="flex items-center space-x-4">
           <span class="flex-shrink-0 w-[100px]">{{ $t('setting.apiAccessToken') }}</span>
           <div class="flex-1">
-            <NInput v-model:value="apiaccesstoken" placeholder="" />
+            <NInput v-model:value="apiAccessToken" placeholder="" />
           </div>
-          <NButton size="tiny" text type="primary" @click="updateUserInfo({ apiaccesstoken })">
+          <NButton size="tiny" text type="primary" @click="updateUserInfo({ apiAccessToken })">
             {{ $t('common.save') }}
           </NButton>
         </div>

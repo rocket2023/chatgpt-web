@@ -10,6 +10,8 @@ export const useUserStore = defineStore('user-store', {
       fetchUsetInfo().then((res) => {
         if (res.status === 'Success') {
           const userInfo = {
+            apiKey: res.data.apiKey,
+            apiAccessToken: res.data.apiAccessToken,
             avatar: res.data.avatar,
             name: res.data.name,
             email: res.data.email,
@@ -29,6 +31,8 @@ export const useUserStore = defineStore('user-store', {
 
     resetUserInfo() {
       this.userInfo = {
+        apiKey: '',
+        apiAccessToken: '',
         avatar: '',
         name: '',
         email: '',

@@ -50,8 +50,8 @@ function handleSubmit() {
 
 async function onConversation() {
   // Pcm 23/0307
-  const apikey = ref(userInfo.value.apikey ?? '')
-  const apiaccesstoken = ref(userInfo.value.apiaccesstoken ?? '')
+  const apikey = ref(userInfo.value.apiKey ?? '')
+  const apiaccesstoken = ref(userInfo.value.apiAccessToken ?? '')
   if (!apikey.value && !apiaccesstoken.value) {
     dialog.warning({
       title: t('setting.nokey'),
@@ -222,7 +222,7 @@ async function onRegenerate(index: number) {
 
   let message = requestOptions?.prompt ?? ''
 
-  let options: Chat.ConversationRequest = {}
+  let options: Chat.ConversationRequest = { apiKey: '', apiAccessToken: '' }
 
   if (requestOptions.options)
     options = { ...requestOptions.options }

@@ -4,8 +4,8 @@ const LOCAL_NAME = 'userStorage'
 const TOKEN_KEY = 'userToken'
 
 export interface UserInfo {
-  apikey: string
-  apiaccesstoken: string
+  apiKey: string
+  apiAccessToken: string
   avatar: string
   email: string
   name: string
@@ -19,8 +19,8 @@ export interface UserState {
 export function defaultUserState(): UserState {
   return {
     userInfo: {
-      apikey: '',
-      apiaccesstoken: '',
+      apiKey: '',
+      apiAccessToken: '',
       avatar: '',
       name: '',
       email: '',
